@@ -1,0 +1,15 @@
+.main {
+  margin: 3rem auto;
+  max-width: 40rem;
+  width: 90%;
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.contentWrap {
+  flex: 1;
+}
