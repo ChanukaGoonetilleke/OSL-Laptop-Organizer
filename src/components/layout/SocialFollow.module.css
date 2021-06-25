@@ -1,0 +1,15 @@
+.container {
+  text-align: center;
+  padding: 25px 50px;
+}
+
+.github {
+  color: white;
+  margin: 0 1rem;
+  transition: transform 250ms;
+  display: inline-block;
+}
+
+.github:hover {
+  transform: translateY(-2px);
+}

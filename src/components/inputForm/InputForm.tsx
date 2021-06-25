@@ -3,20 +3,21 @@ import React, { useState, useRef } from "react";
 import classes from "./InputForm.module.css";
 import Card from "../UI/Card";
 
-const InputForm: React.FC<{onAddItem: (item:any) => void}> = (props) => {
+import { GrClose } from "react-icons/gr";
+
+const InputForm: React.FC<{ onAddItem: (item: any) => void }> = (props) => {
   const [showSubmit, setShowSubmit] = useState(false);
 
-  const typeRef=useRef<HTMLInputElement>(null);
-  const priceRef=useRef<HTMLInputElement>(null);
-  const upcRef=useRef<HTMLInputElement>(null);
-  const quantityRef=useRef<HTMLInputElement>(null);
-  const descriptionRef=useRef<HTMLInputElement>(null);
-
+  const typeRef = useRef<HTMLInputElement>(null);
+  const priceRef = useRef<HTMLInputElement>(null);
+  const upcRef = useRef<HTMLInputElement>(null);
+  const quantityRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if(showSubmit){
+    if (showSubmit) {
       const item = {
         type: typeRef.current!.value,
         price: priceRef.current!.value,
@@ -24,9 +25,15 @@ const InputForm: React.FC<{onAddItem: (item:any) => void}> = (props) => {
         quantity: quantityRef.current!.value,
         description: descriptionRef.current!.value,
       };
-      
+
       props.onAddItem(item);
     }
+
+    setShowSubmit(!showSubmit);
+  };
+
+  const onCloseHandler = (event: React.FormEvent) => {
+    event.preventDefault();
 
     setShowSubmit(!showSubmit);
   };
@@ -34,6 +41,12 @@ const InputForm: React.FC<{onAddItem: (item:any) => void}> = (props) => {
   return (
     <React.Fragment>
       <Card>
+        {showSubmit && (
+          <div className={classes.close}>
+            <GrClose size="1.5em" onClick={onCloseHandler} />
+          </div>
+        )}
+
         <form onSubmit={submitHandler}>
           {showSubmit && (
             <div className={classes.form}>
@@ -43,26 +56,45 @@ const InputForm: React.FC<{onAddItem: (item:any) => void}> = (props) => {
                 id="type"
                 placeholder="demo number or non demo"
                 ref={typeRef}
-                
+                required
               />
             </div>
           )}
           {showSubmit && (
             <div className={classes.form}>
               <label>Price: </label>
-              <input type="number" step="any"  id="price" placeholder="price ..." ref={priceRef} />
+              <input
+                type="number"
+                step="any"
+                id="price"
+                placeholder="price"
+                ref={priceRef}
+                required
+              />
             </div>
           )}
           {showSubmit && (
             <div className={classes.form}>
               <label>UPC: </label>
-              <input type="number" id="upc" placeholder="upc ..." ref={upcRef} />
+              <input
+                type="number"
+                id="upc"
+                placeholder="upc"
+                ref={upcRef}
+                required
+              />
             </div>
           )}
           {showSubmit && (
             <div className={classes.form}>
               <label>Quantity: </label>
-              <input type="number" id="quantity" placeholder="quantity ..." ref={quantityRef} />
+              <input
+                type="number"
+                id="quantity"
+                placeholder="quantity"
+                ref={quantityRef}
+                required
+              />
             </div>
           )}
           {showSubmit && (
@@ -73,7 +105,7 @@ const InputForm: React.FC<{onAddItem: (item:any) => void}> = (props) => {
                 id="description"
                 placeholder="brand, model, specs, color"
                 ref={descriptionRef}
-                
+                required
               />
             </div>
           )}

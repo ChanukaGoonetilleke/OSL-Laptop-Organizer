@@ -1,12 +1,11 @@
-import React, {useState, useCallback, useEffect} from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import "./App.css";
 
 import Layout from "./components/layout/Layout";
 import InputForm from "./components/inputForm/InputForm";
-import ItemList from './components/items/ItemList';
+import ItemList from "./components/items/ItemList";
 
 function App() {
-
   const [items, setItems] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,9 +14,11 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://osl-inventory-default-rtdb.firebaseio.com/items.json');
+      const response = await fetch(
+        "https://osl-inventory-default-rtdb.firebaseio.com/items.json"
+      );
       if (!response.ok) {
-        throw new Error('Something went wrong!');
+        throw new Error("Something went wrong!");
       }
 
       const data = await response.json();
@@ -43,16 +44,19 @@ function App() {
 
   useEffect(() => {
     fetchItemHandler();
-  },[]);
+  }, []);
 
-  async function addItemHandler(item:any) {
-    const response = await fetch('https://osl-inventory-default-rtdb.firebaseio.com/items.json', {
-      method: 'POST',
-      body: JSON.stringify(item),
-      headers: {
-        'Content-Type': 'application/json'
+  async function addItemHandler(item: any) {
+    const response = await fetch(
+      "https://osl-inventory-default-rtdb.firebaseio.com/items.json",
+      {
+        method: "POST",
+        body: JSON.stringify(item),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
     const data = await response.json();
     fetchItemHandler();
   }
@@ -74,7 +78,7 @@ function App() {
   return (
     <div className="App">
       <Layout>
-        <InputForm onAddItem={addItemHandler}/>
+        <InputForm onAddItem={addItemHandler} />
         {content}
       </Layout>
     </div>

@@ -3,6 +3,7 @@ import React from "react";
 import classes from "./Layout.module.css";
 
 import MainNavigation from "./MainNavigation";
+import Footer from "./Footer";
 
 const Layout: React.FC<{}> = (props) => {
   return (
@@ -12,6 +13,7 @@ const Layout: React.FC<{}> = (props) => {
           <MainNavigation />
           <main className={classes.main}>{props.children}</main>
         </div>
+        <Footer />
       </div>
     </React.Fragment>
   );
