@@ -13,7 +13,7 @@ const QuantityItem: React.FC<{ id: string; value: number }> = (props) => {
         if (err) {
           console.log(err);
         } else {
-          console.log("Success!");
+          //console.log("Success!");
         }
       });
     }
@@ -25,7 +25,7 @@ const QuantityItem: React.FC<{ id: string; value: number }> = (props) => {
       if (err) {
         console.log(err);
       } else {
-        console.log("Success!");
+        //console.log("Success!");
       }
     });
   };
@@ -36,7 +36,7 @@ const QuantityItem: React.FC<{ id: string; value: number }> = (props) => {
         <button onClick={subOnClickHandler} className={classes.button}>
           -
         </button>
-        <h2>{quantity}</h2>
+        {quantity > 0 ? <h2>{quantity}</h2> : <h2>Out of Stock</h2>}
         <button onClick={addOnClickHandler} className={classes.button}>
           +
         </button>

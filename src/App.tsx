@@ -4,6 +4,7 @@ import "./App.css";
 import Layout from "./components/layout/Layout";
 import InputForm from "./components/inputForm/InputForm";
 import ItemList from "./components/items/ItemList";
+import Search from "./components/search/Search";
 
 function App() {
   const [items, setItems] = useState<any>([]);
@@ -42,8 +43,12 @@ function App() {
     setIsLoading(false);
   }, []);
 
-  useEffect(() => {
-    fetchItemHandler();
+  // useEffect(() => {
+  //   fetchItemHandler();
+  // }, []);
+
+  const filteredItemHandler = useCallback((filteredItems: any) => {
+    setItems(filteredItems);
   }, []);
 
   async function addItemHandler(item: any) {
@@ -79,6 +84,7 @@ function App() {
     <div className="App">
       <Layout>
         <InputForm onAddItem={addItemHandler} />
+        <Search onLoadItems={filteredItemHandler} />
         {content}
       </Layout>
     </div>
